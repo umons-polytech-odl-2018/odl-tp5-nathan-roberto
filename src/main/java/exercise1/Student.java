@@ -1,8 +1,6 @@
 package exercise1;
 
-import java.util.Optional;
-import java.util.OptionalInt;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Represents a student.
@@ -10,14 +8,22 @@ import java.util.Set;
  * A student gets scored in different courses.
  * These scores are expressed as integers on a scale from 0 to 20.
  */
+
 public class Student {
+    String name;
+    String registrationNumber;
+    String course;
+
+    Map<String, OptionalInt> listScore = new HashMap<>();
+
     /**
      * Creates a new Student.
      *
      * @throws NullPointerException if one of the parameter is null.
      */
     public Student(String name, String registrationNumber) {
-
+        this.name = name;
+        this.registrationNumber = registrationNumber;
     }
 
     /**
@@ -28,7 +34,7 @@ public class Student {
      * @throws IllegalArgumentException if the score is less than 0 or greater than 20.
      */
     public void setScore(String course, int score) {
-
+        listScore.put(course, OptionalInt.of(score));
     }
 
     /**
@@ -37,7 +43,7 @@ public class Student {
      * @return the score if found, <code>OptionalInt#empty()</code> otherwise.
      */
     public OptionalInt getScore(String course) {
-        return null;
+        return listScore.get(course);
     }
 
     /**
@@ -46,7 +52,15 @@ public class Student {
      * @return the average score or 0 if there is none.
      */
     public double averageScore() {
-        return 0;
+        double temp = 0;
+        int size = listScore.size();
+        for (String key : listScore.keySet()) {
+            if(!listScore.get(key).isPresent()) {
+                temp += listScore.get(key).getAsInt();
+            }
+            else size -=1;
+        }
+        return (temp/size);
     }
 
     /**
