@@ -24,6 +24,7 @@ public class Student {
     public Student(String name, String registrationNumber) {
         this.name = name;
         this.registrationNumber = registrationNumber;
+        //yolo
     }
 
     /**
