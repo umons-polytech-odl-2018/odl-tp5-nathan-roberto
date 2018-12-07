@@ -34,6 +34,12 @@ public class Student {
      * @throws IllegalArgumentException if the score is less than 0 or greater than 20.
      */
     public void setScore(String course, int score) {
+        if(course == null) {
+            throw new NullPointerException();
+        }
+        //if(listScore.get(course).getAsInt()<0 || listScore.get(course).getAsInt()>20){
+        //    throw  new IllegalArgumentException();
+        //}
         listScore.put(course, OptionalInt.of(score));
     }
 
@@ -86,7 +92,13 @@ public class Student {
      * A course is considered as passed if its score is higher than 12.
      */
     public Set<String> failedCourses() {
-        return null;
+        Set<String> listFailed = null;
+        for (String key : listScore.keySet()) {
+            if(listScore.get(key).getAsInt()<12) {
+                listFailed.add(key);
+            }
+        }
+        return listFailed;
     }
 
     /**
